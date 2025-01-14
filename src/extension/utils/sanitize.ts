@@ -9,8 +9,7 @@
 export function sanitizeUserInput(text: string): string {
   return text
     .replace(/\r\n/g, "\n") // Normalize line endings
-    .replace(/[\x00-\x09\x0B-\x1F\x7F-\uFFFF]/g, "") // Remove control chars except newline
-    .replace(/[^\x20-\x7E\n]/g, "") // Remove non-ASCII chars except newline
+    .replace(/[^\S\n]/g, " ") // Replace control characters with space, preserve newlines
     .trim();
 }
 
@@ -21,6 +20,6 @@ export function sanitizeTerminalOutput(text: string): string {
   return text
     .replace(/\r/g, "") // Remove standalone CR
     .replace(/[%$#>]\s*$/, "") // Remove shell prompts
-    .replace(/[\x00-\x09\x0B-\x1F\x7F-\uFFFF]/g, "") // Remove control chars
+    .replace(/[^\x20-\x7E\n]/g, "") // Remove non-printable chars while preserving newlines
     .trim();
 }

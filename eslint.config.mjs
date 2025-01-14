@@ -5,6 +5,9 @@ import antfu from "@antfu/eslint-config";
 export default antfu(
   {
     type: "lib",
+    rules: {
+      "no-control-regex": "off"
+    },
     stylistic: {
       indent: 2,
       quotes: "double",
